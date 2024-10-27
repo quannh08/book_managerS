@@ -7,7 +7,7 @@ class Author(models.Model):
     nationality = models.CharField(max_length=100, null=True, blank=True)  
     profile_picture = models.ImageField(upload_to='authors/', null=True, blank=True) 
     awards = models.TextField(blank=True, null=True)  
-    books = models.JSONField(blank=True, null=True)  
+      
 
     def __str__(self):
         return self.name
