@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'authors',
     'users',
     'books',
+    'readhistory',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
