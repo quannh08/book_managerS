@@ -20,6 +20,7 @@ class Book(models.Model):
     content = models.TextField()
     image = models.URLField()
     id_author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
+    read_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
