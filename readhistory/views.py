@@ -41,12 +41,15 @@ class ReadHistoryAPIView(generics.ListCreateAPIView):
         user = request.user
         if user.is_anonymous:
             return Response({'error': 'Bạn cần đăng nhập để xem lịch sử đọc.'}, status=status.HTTP_403_FORBIDDEN)
-        # Kiểm tra xem người dùng có phải là admin không
-        if user.is_staff:
-            user_histories = ReadHistory.objects.all()  # Admin xem tất cả
-        else:
-            user_histories = ReadHistory.objects.filter(id_user=user)  # Người dùng thường xem của họ
+        
+        user_histories = ReadHistory.objects.filter(id_user=user)
 
-        serializer = self.get_serializer(user_histories, many=True)       
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        # Tạo dữ liệu phản hồi
+        read_books = [{"id_book": history.id_book.id_book, "read_at": history.read_at} for history in user_histories]
+        
+        response_data = {
+            "username": user.username,
+            "read_books": read_books
+        }
 
+        return Response(response_data, status=status.HTTP_200_OK)
