@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-from .models import Book, Category, Author
-from .serializers import BookSerializer, CategorySerializer, AuthorSerializer
+from .models import Book, Category
+from .serializers import BookSerializer, CategorySerializer
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
@@ -26,6 +26,4 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-class AuthorViewSet(viewsets.ModelViewSet):
-    queryset = Author.objects.all()
-    serializer_class = AuthorSerializer
+
