@@ -13,7 +13,7 @@ class Book(models.Model):
     content = models.FileField(upload_to='pdfs/', null=True, blank=True)
     image = models.URLField()
     pdf_file = models.FileField(upload_to='pdfs/', null=True, blank=True)  # Thêm trường PDF
-   
+    read_count = models.PositiveIntegerField(default=0)   
 
     def __str__(self):
         return self.title
