@@ -23,5 +23,10 @@ class BookSerializer(serializers.ModelSerializer):
         return representation
 
     def get_pdf_url(self, obj):
-        # Trả về URL đầy đủ của file PDF nếu có
-        return obj.pdf_file.url if obj.pdf_file else None
+        # Check request
+        request = self.context.get('request')
+        # Trả về url
+        if obj.pdf_file and request:
+            return request.build_absolute_uri(obj.pdf_file.url)
+        return None
+    
