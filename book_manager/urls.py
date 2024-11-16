@@ -27,7 +27,7 @@ urlpatterns = [
     path('user/',include('users.urls')),
     path('', include('authors.urls')),
     path('', include('books.urls')),
-    path('', include('readhistory.urls'))
+    path('', include('readHistory.urls')),
 ]
 
 if settings.DEBUG:

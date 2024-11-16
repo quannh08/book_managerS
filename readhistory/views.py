@@ -3,6 +3,7 @@ import jwt
 from rest_framework import status
 from rest_framework.response import Response
 from .models import ReadHistory, Book
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework import exceptions
 from rest_framework.authentication import BaseAuthentication
@@ -15,6 +16,7 @@ class JWTAuthentication(BaseAuthentication):
             raise exceptions.AuthenticationFailed('Token missing')
 
         try:
+            token = token.split(' ')[1]
             payload = jwt.decode(token, 'secret', algorithms=['HS256'])
             user = User.objects.get(id=payload['id'])
         except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
@@ -64,4 +66,7 @@ class ReadHistoryAPIView(APIView):
         }
 
         return Response(response_data, status=status.HTTP_200_OK)
+    
+def test_page(request):
+    return render(request, 'test.html')
 
